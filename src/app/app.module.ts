@@ -5,7 +5,11 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { SearchComponent } from './components/search/search.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
-import { FeatureRoutingModule } from './app.routes';
+import { FeatureRoutingModule } from './app.routes';;
+import { HttpClientModule } from '@angular/common/http';
+
+// servicios
+import {SpotifyService } from './services/spotify.service';
 
 @NgModule({
   declarations: [
@@ -16,9 +20,10 @@ import { FeatureRoutingModule } from './app.routes';
   ],
   imports: [
     BrowserModule,
-    FeatureRoutingModule
+    FeatureRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [SpotifyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
