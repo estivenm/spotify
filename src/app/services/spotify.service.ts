@@ -5,28 +5,45 @@ import { HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class SpotifyService {
 
-  artistas: any[] = [];
+  urlBusqueda: string = "https://api.spotify.com/v1/search";
+  urlArtistas: string = "https://api.spotify.com/v1/artists";
+  urlAccount: string = 'https://accounts.spotify.com/api/token';
+  artist: any;
 
-  urlBusqueda: String = "https://api.spotify.com/v1/search";
-  urlArtistas: String = "https://api.spotify.com/v1/artists";
-
+  httpOptions = {
+    headers: new HttpHeaders({
+      'authorization': 'Bearer BQDm5x1jiaVRZxk5soraezRAZee8WzOhaIbtVFlcQxFoXYkGYD26laQs6vDDp5snvdHwSHBhvpz2CWS-h7M',
+    })
+  };
+  
   constructor(private httpClient: HttpClient) { }
 
-  getArtistas(termino: String) {
+  getArtistas(termino: string) {
 
-        const httpOptions = {
-          headers: new HttpHeaders({
-    //        'Content-Type':  'application/json',
-            'authorization': 'Bearer BQCzH7rVwwL_GABt9kHm_87POvDgMpMhC997g86xKrNq0DteW6YmyBl1k_RqKGfyeRqRzxWSF8NgW3S3Ac0'
-          })
-        }
+    let query = `?q=${termino}&type=artist`;
+    let url = this.urlBusqueda + query;
+    this.httpClient.get(url, this.httpOptions).subscribe(data =>{
+      this.artist = data;
+      console.log('service getartist =>',this.artist);
+      
+    })
+    return this.httpClient.get(url, this.httpOptions);
 
-        let query = `?q=${termino}&type=artist`;
-        let url = this.urlBusqueda + query;
-        return this.httpClient.get(url,httpOptions)
-        .subscribe(res =>{
-          console.log(res);
-        })
+  }
+
+  getArtista(id: string) {
+
+    let query = `/${id}`;
+    let url = this.urlArtistas + query;
+    return this.httpClient.get(url, this.httpOptions);
+
+  }
+
+  getTop(id: string) {
+
+    let query = `/${id}/top-tracks?country=US`;
+    let url = this.urlArtistas + query;
+    return this.httpClient.get(url, this.httpOptions);
 
   }
 }
