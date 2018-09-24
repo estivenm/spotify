@@ -20,9 +20,9 @@ export class ArtistaComponent implements OnInit {
   ngOnInit() {
 
     this._activateRoutes.params.subscribe((parameter: ParamMap) => {
-      this.idArtista = parameter['id']
-      this._spotyfyService.getArtista(this.idArtista).subscribe(dataArtista => this.artista = dataArtista)
-      this._spotyfyService.getTop(this.idArtista).subscribe(dataTracks => this.canciones = dataTracks['tracks'] )
+      this.idArtista = parameter['id'];
+      this._spotyfyService.getArtista(this.idArtista).subscribe(dataArtista => this.artista = dataArtista);
+      this._spotyfyService.getTop(this.idArtista).subscribe(dataTracks => this.canciones = dataTracks['tracks']);
     });
   }
 

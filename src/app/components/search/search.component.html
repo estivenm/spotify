@@ -11,7 +11,7 @@
     <div class="col-md-9">
       <div class="row" *ngIf="_spotifyServices.artist">
         <div class="col-md-3 text-center puntero" (click)="obtenerName()" [routerLink]="[ '/artista',artista.id]" *ngFor="let artista of _spotifyServices.artist.artists.items">
-          <img [src]="artista.images | sinfoto" class="img-fluid img-thumbnail">
+          <img [src]="artista.images | sinfoto" class="img-fluid img-thumbnail fadeIn slow">
           <p>{{artista.name}}</p>
           <hr>
         </div>

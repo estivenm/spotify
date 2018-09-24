@@ -11,12 +11,11 @@ import { SpotifyService } from '../../services/spotify.service';
 export class SearchComponent implements OnInit {
 
   //@Input() termino: string = "arcangel";
-  termino: string = "";
+  termino: string = '';
   artistas: [any];
   constructor(private _spotifyServices: SpotifyService) { }
 
   ngOnInit() {
-  
     // if(localStorage.getItem("nameSearch")) {
     //   this.termino = localStorage.getItem("nameSearch")
     //   this.buscarArtistas()
@@ -27,8 +26,8 @@ export class SearchComponent implements OnInit {
     return this._spotifyServices.getArtistas(this.termino).subscribe(data => this.artistas = data['artists'].items);
   }
 
-  obtenerName(){
-    localStorage.setItem("nameSearch",this.termino);
+  obtenerName() {
+    localStorage.setItem('nameSearch', this.termino);
   }
 }
 
